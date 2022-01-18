@@ -33,4 +33,4 @@ jobs:
     - name: Build dotnet bundle
       run: |
           cd ./code-first-db-ci-cd
-          dotnet ef migrations bundle
+          dotnet ef migrations bundle --configuration github.com.dotnet.efcore.issues.25555
