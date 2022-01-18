@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-
+  
     runs-on: windows-latest
 
     steps:
@@ -29,16 +29,36 @@ jobs:
           dotnet new tool-manifest
           dotnet tool install dotnet-ef
      
-    # generate migrations bundle
+    # Generate migrations bundle
     - name: Build dotnet bundle
       run: |
           cd ./code-first-db-ci-cd
           dotnet ef migrations bundle --configuration github.com.dotnet.efcore.issues.25555
           
-   # Publish migrations bundle as artifact
+    # Publish migrations bundle as artifact
     - uses: actions/upload-artifact@v2
       with:
         name: MigrationBundle
         path: ${{ github.workspace }}\code-first-db-ci-cd\efbundle.exe
         if-no-files-found: error
         retention-days: 30
+        
+  deploy-database:
+  
+    runs-on: windows-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Download Build artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: MigrationBundle
+    
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: Apply migrations to deployed database
+      run: |
+          efbundle.exe --connection ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
