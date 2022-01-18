@@ -61,4 +61,4 @@ jobs:
         
     - name: Apply migrations to deployed database
       run: |
-          efbundle --connection ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+          ./efbundle --connection ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
