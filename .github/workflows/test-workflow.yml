@@ -39,6 +39,6 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: MigrationBundle
-        path: ${{ github.workspace }}\code-first-db-ci-cd\code-first-db-ci-cd\
+        path: ${{ github.workspace }}\code-first-db-ci-cd\
         if-no-files-found: error
         retention-days: 30
