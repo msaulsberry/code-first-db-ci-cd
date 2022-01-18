@@ -31,4 +31,6 @@ jobs:
      
     # saves migrations bundle as artifact
     - name: Build dotnet bundle
-      run: dotnet ef migrations bundle
+      run: |
+          cd ./code-first-db-ci-cd
+          dotnet ef migrations bundle
