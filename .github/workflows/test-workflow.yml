@@ -39,6 +39,6 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: MigrationBundle
-        path: ${{ github.workspace }}\code-first-db-ci-cd\efbundle
+        path: ${{ github.workspace }}\code-first-db-ci-cd\efbundle.exe
         if-no-files-found: error
         retention-days: 30
