@@ -22,5 +22,7 @@ namespace code_first_db_ci_cd.Data.Models
         [MaxLength(256)]
         public string Email { get; set; }
 
+        public string Company { get; set; }
+
     }
 }
