@@ -24,5 +24,7 @@ namespace code_first_db_ci_cd.Data.Models
 
         public string Company { get; set; }
 
+        //add a comment
+
     }
 }
