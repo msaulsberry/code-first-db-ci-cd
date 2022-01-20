@@ -33,7 +33,7 @@ jobs:
     - name: Build dotnet bundle
       run: |
           cd ./code-first-db-ci-cd
-          dotnet ef migrations script -o ${{ github.workspace }}\code-first-db-ci-cd\migration-script.sql
+          dotnet ef migrations script -o ${{ github.workspace }}\code-first-db-ci-cd\migration-script.sql --idempotent
           
     # Publish migrations bundle as artifact
     - uses: actions/upload-artifact@v2
@@ -58,3 +58,9 @@ jobs:
     - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - uses: azure/sql-action@v1
+      with:        
+        server-name: mitch-sql-test
+        connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+        sql-file: migration-script.sql
