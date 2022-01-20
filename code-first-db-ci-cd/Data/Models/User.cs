@@ -18,5 +18,9 @@ namespace code_first_db_ci_cd.Data.Models
         [MaxLength(256)]
         public string Last { get; set; }
 
+        [Required]
+        [MaxLength(256)]
+        public string Email { get; set; }
+
     }
 }
