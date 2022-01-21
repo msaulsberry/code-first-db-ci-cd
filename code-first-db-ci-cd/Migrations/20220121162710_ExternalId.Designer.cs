@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using code_first_db_ci_cd.Data;
 
@@ -10,9 +11,10 @@ using code_first_db_ci_cd.Data;
 namespace code_first_db_ci_cd.Migrations
 {
     [DbContext(typeof(CodeFirstCiCdContext))]
-    partial class CodeFirstCiCdContextModelSnapshot : ModelSnapshot
+    [Migration("20220121162710_ExternalId")]
+    partial class ExternalId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
