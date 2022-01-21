@@ -26,5 +26,7 @@ namespace code_first_db_ci_cd.Data.Models
 
         //add a comment
 
+        public int ExternalId { get; set; }
+
     }
 }
