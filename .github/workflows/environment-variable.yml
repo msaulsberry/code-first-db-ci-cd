@@ -24,6 +24,6 @@ jobs:
       run: dotnet build --no-restore
       
     - name: Echo environment variable
-      run: echo "$env:Honeycomb:ApiKey"
+      run: echo $env:Honeycomb:ApiKey
           
           
