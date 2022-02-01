@@ -33,13 +33,13 @@ jobs:
     - name: Build dotnet bundle
       run: |
           cd ./code-first-db-ci-cd
-          dotnet ef migrations script -o ${{ github.workspace }}\code-first-db-ci-cd\migration-script.sql --idempotent
+          dotnet ef migrations script -o ${{ github.workspace }}\scripts\migration-script.sql --idempotent
           
     # Publish migrations bundle as artifact
     - uses: actions/upload-artifact@v2
       with:
         name: MigrationScript
-        path: ${{ github.workspace }}\code-first-db-ci-cd\migration-script.sql
+        path: ${{ github.workspace }}\scripts\migration-script.sql
         if-no-files-found: error
         retention-days: 30
         
