@@ -55,7 +55,7 @@ jobs:
           targetDatabase="mitch-sql-test-staging"
 
           echo "Creating $database on $server..."
-          az sql db create --name $database --resource-group $resourceGroup --server $server --service-objective Basic
+          az sql db create --name $targetDatabase --resource-group $resourceGroup --server $server --service-objective Basic
 
           echo "Copying $database to $targetDatabase on $targetServer..."
           az sql db copy --dest-name $targetDatabase --dest-resource-group $resourceGroup --dest-server $server --name $database --resource-group $resourceGroup --server $server
