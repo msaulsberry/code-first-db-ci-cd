@@ -1,9 +1,6 @@
 name: Deploy Staging Environment
 
-on:
-  push:
-    branches: [ main ]
-    
+on:   
   workflow_dispatch:
 
 jobs:
@@ -19,6 +16,11 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
+      
+    - name: Install EF Tool
+      run: |
+          dotnet new tool-manifest
+          dotnet tool install dotnet-ef
       
     # Generate migration script
     - name: Build dotnet bundle
