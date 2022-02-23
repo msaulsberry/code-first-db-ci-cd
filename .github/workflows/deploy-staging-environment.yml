@@ -54,15 +54,10 @@ jobs:
         inlineScript: |
           location="Central US"
           resourceGroup="deleteme-sql-db-test"
-          tag="copy-database-to-staging"
           server="mitch-sql-test"
           database="mitch-sql-test"
-          targetDatabase="mitch-sql-test-staging"
-
-          echo "Creating $database on $server..."
-          az sql db create --name $targetDatabase --resource-group $resourceGroup --server $server --service-objective Basic
-
-          echo "Copying $database to $targetDatabase on $targetServer..."
-          az sql db copy --dest-name $targetDatabase --dest-resource-group $resourceGroup --dest-server $server --name $database --resource-group $resourceGroup --server $server
+          newDatabase="mitch-sql-test-staging"
+          
+          az sql db copy -g $resourceGroup -s $server -n $database --dest-name $newDatabase --service-objective Basic
   
     
