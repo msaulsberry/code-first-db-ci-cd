@@ -67,7 +67,7 @@ jobs:
           server="mitch-sql-test"
           database="mitch-sql-test-staging"
           
-          az sql db delete --name $database --resource-group $resourceGroup --server $server
+          az sql db delete -n $database -g $resourceGroup -s $server -y
     
   create-staging-db:
   
