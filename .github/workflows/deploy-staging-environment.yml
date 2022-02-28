@@ -49,10 +49,30 @@ jobs:
         name: TestApi
         path: ${{env.DOTNET_ROOT}}/testapi
       
+  remove-previous-staging-db: 
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: Azure CLI database copy script
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.30.0
+        inlineScript: |
+          resourceGroup="deleteme-sql-db-test"
+          server="mitch-sql-test"
+          database="mitch-sql-test"
+          
+          az sql db delete -n $database -g $resourceGroup -s $server
+    
   create-staging-db:
   
     runs-on: ubuntu-latest
-    needs: build
+    needs: remove-previous-staging-db
     
     steps:
     
@@ -70,6 +90,8 @@ jobs:
           server="mitch-sql-test"
           database="mitch-sql-test"
           newDatabase="mitch-sql-test-staging"
+          
+          az sql db copy -g $resourceGroup -s $server -n $database --dest-name $newDatabase --service-objective Basic
   
   deploy-to-staging-slot:
   
