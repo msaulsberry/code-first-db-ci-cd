@@ -73,4 +73,23 @@ jobs:
           
           az sql db copy -g $resourceGroup -s $server -n $database --dest-name $newDatabase --service-objective Basic
   
+  deploy-to-staging-slot:
+  
+    runs-on: windows-latest
+    needs: create-staging-db
     
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: testapi
+          
+          
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'mitch-ci-cd'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: .
