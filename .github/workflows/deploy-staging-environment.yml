@@ -70,8 +70,6 @@ jobs:
           server="mitch-sql-test"
           database="mitch-sql-test"
           newDatabase="mitch-sql-test-staging"
-          
-          az sql db copy -g $resourceGroup -s $server -n $database --dest-name $newDatabase --service-objective Basic
   
   deploy-to-staging-slot:
   
@@ -82,7 +80,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: testapi
+          name: TestApi
           
           
       - name: Deploy to Azure Web App
