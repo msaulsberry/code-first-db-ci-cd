@@ -65,7 +65,7 @@ jobs:
         inlineScript: |
           resourceGroup="deleteme-sql-db-test"
           server="mitch-sql-test"
-          database="mitch-sql-test"
+          database="mitch-sql-test-staging"
           
           az sql db delete -n $database -g $resourceGroup -s $server
     
